@@ -88,7 +88,7 @@ const SignUp = () => {
             onChange={(event) => onChangeHandler(event)}
           />
           <button
-            className="bg-green-400 hover:bg-green-500 w-full py-2 text-white"
+            className="bg-blue-600 hover:bg-blue-600 w-full py-2 text-white"
             onClick={(event) => {
               createUserWithEmailAndPasswordHandler(event, email, password);
             }}
@@ -105,7 +105,7 @@ const SignUp = () => {
               console.error("Error signing in with Google", error);
             }
           }}
-          className="bg-red-500 hover:bg-red-600 w-full py-2 text-white"
+          className="bg-red-600 hover:bg-red-600 w-full py-2 text-white"
         >
           Sign In with Google
         </button>
