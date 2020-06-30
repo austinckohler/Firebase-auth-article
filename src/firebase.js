@@ -4,14 +4,14 @@ import "firebase/firestore";
 import { functions } from "firebase";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA9WZB5N6ekNxyN3yGaUwjuBilvXItUv38",
-  authDomain: "fir-auth-article.firebaseapp.com",
-  databaseURL: "https://fir-auth-article.firebaseio.com",
-  projectId: "fir-auth-article",
-  storageBucket: "fir-auth-article.appspot.com",
-  messagingSenderId: "774252759419",
-  appId: "1:774252759419:web:e014ddfa3553a4832a15de",
-  measurementId: "G-77Z5WJ0SET"
+  apiKey: "AIzaSyD4AC1T_YVYpWZ4PIqVS9VnF8RoOXoHDrg",
+  authDomain: "xplorado-9da45.firebaseapp.com",
+  databaseURL: "https://xplorado-9da45.firebaseio.com",
+  projectId: "xplorado-9da45",
+  storageBucket: "xplorado-9da45.appspot.com",
+  messagingSenderId: "242528628544",
+  appId: "1:242528628544:web:be73eefeed2c4ae77214a5",
+  measurementId: "G-W5K5QFC7NV",
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -37,7 +37,7 @@ export const generateUserDocument = async (user, additionalData) => {
         displayName,
         email,
         photoURL,
-        ...additionalData
+        ...additionalData,
       });
     } catch (error) {
       console.error("Error creating user document", error);
@@ -46,14 +46,14 @@ export const generateUserDocument = async (user, additionalData) => {
   return getUserDocument(user.uid);
 };
 
-const getUserDocument = async uid => {
+const getUserDocument = async (uid) => {
   if (!uid) return null;
   try {
     const userDocument = await firestore.doc(`users/${uid}`).get();
 
     return {
       uid,
-      ...userDocument.data()
+      ...userDocument.data(),
     };
   } catch (error) {
     console.error("Error fetching user", error);

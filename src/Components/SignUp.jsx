@@ -5,33 +5,39 @@ import { auth, signInWithGoogle, generateUserDocument } from "../firebase";
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [displayName, setDisplayName] = useState("");
+  const [name, setName] = useState("");
   const [error, setError] = useState(null);
 
-  const createUserWithEmailAndPasswordHandler = async (event, email, password) => {
+  const createUserWithEmailAndPasswordHandler = async (
+    event,
+    email,
+    password
+  ) => {
     event.preventDefault();
-    try{
-      const {user} = await auth.createUserWithEmailAndPassword(email, password);
-      generateUserDocument(user, {displayName});
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      generateUserDocument(user, { name });
+    } catch (error) {
+      setError("Error Signing up with email and password");
     }
-    catch(error){
-      setError('Error Signing up with email and password');
-    }
-      
+
     setEmail("");
     setPassword("");
-    setDisplayName("");
+    setName("");
   };
 
-  const onChangeHandler = event => {
+  const onChangeHandler = (event) => {
     const { name, value } = event.currentTarget;
 
     if (name === "userEmail") {
       setEmail(value);
     } else if (name === "userPassword") {
       setPassword(value);
-    } else if (name === "displayName") {
-      setDisplayName(value);
+    } else if (name === "name") {
+      setName(value);
     }
   };
 
@@ -45,17 +51,17 @@ const SignUp = () => {
           </div>
         )}
         <form className="">
-          <label htmlFor="displayName" className="block">
-            Display Name:
+          <label htmlFor="name" className="block">
+            Full Name:
           </label>
           <input
             type="text"
             className="my-1 p-1 w-full "
-            name="displayName"
-            value={displayName}
-            placeholder="E.g: Faruq"
-            id="displayName"
-            onChange={event => onChangeHandler(event)}
+            name="name"
+            value={name}
+            placeholder="Full Name"
+            id="name"
+            onChange={(event) => onChangeHandler(event)}
           />
           <label htmlFor="userEmail" className="block">
             Email:
@@ -65,9 +71,9 @@ const SignUp = () => {
             className="my-1 p-1 w-full"
             name="userEmail"
             value={email}
-            placeholder="E.g: faruq123@gmail.com"
+            placeholder="Email"
             id="userEmail"
-            onChange={event => onChangeHandler(event)}
+            onChange={(event) => onChangeHandler(event)}
           />
           <label htmlFor="userPassword" className="block">
             Password:
@@ -79,11 +85,11 @@ const SignUp = () => {
             value={password}
             placeholder="Your Password"
             id="userPassword"
-            onChange={event => onChangeHandler(event)}
+            onChange={(event) => onChangeHandler(event)}
           />
           <button
             className="bg-green-400 hover:bg-green-500 w-full py-2 text-white"
-            onClick={event => {
+            onClick={(event) => {
               createUserWithEmailAndPasswordHandler(event, email, password);
             }}
           >
